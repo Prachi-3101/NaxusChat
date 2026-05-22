@@ -1,5 +1,7 @@
 import express from "express";
 import cors from "cors";
+import connectDB from "./utils/db.js";
+import userRoutes from "./router/user.route.js";
 
 const app = express();
 
@@ -12,4 +14,12 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
+app.use("/api/user",userRoutes);
+
 const PORT = 5000;
+
+connectDB().then(() => {
+    app.listen(PORT, () => {
+        console.log(`server is listening at port ${PORT}`);
+    })
+})
