@@ -24,6 +24,7 @@ const sendMessage = async(req,res) => {
         let message = await Message.create(newMessage);
 
         //populate chat
+        message = await message.populate("sender","name picture email");
         message = await message.populate("chat");
 
         //populate chat user
